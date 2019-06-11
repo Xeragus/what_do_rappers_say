@@ -3,15 +3,15 @@ Rap music has been one of the most influential music genres for the biggest part
 
 The purpose of this project is to analyze 5 songs per rapper. We analyze 6 rappers, meaning our data will contain lyrics from 30 songs. The goal of our analysis is to make conclusions on the positivity and the subjectivity of the rappers, as well as the size of their vocabulary.
 
-This project, as hopefully every other data science project, will go through the notorious process of "Data Cleaning". It's boring and all that, yet it's absoulutely vital for the sanity of our results. If you put sour food in the juicer, you can't really expect not to get sour juice, right? Feed a model with bad data, it feeds you with bad results. In the world of data science, it's almost impossible to completely clean your data, yet we should always try to minimize the garbage, so we can maximize the correctness of our output.
+This project, as hopefully every other data science project, will go through the notorious process of "Data Cleaning". It's boring and all that, yet it's absolutely vital for the sanity of our results. If you put sour food in the juicer, you can't really expect not to get sour juice, right? Feed a model with bad data, it feeds you with bad results. In the world of data science, it's almost impossible to completely clean your data, yet we should always try to minimize the garbage, so we can maximize the correctness of our output.
 
 Clean data is not enough. We need properly structured data. Why? Well, algorithms have a thing for properly structured data. Organizing data in the right way makes it easier for algorithms to extract better information.
 
-It's worth noting that the choice of rappers and songs is totally subjective. You could to this analysis for any musician, author, poet or any other text content producer. Good luck with cleaning data for mumble rap lyrics though.
+It's worth noting that the choice of rappers and songs is totally subjective. You could do this analysis for any musician, author, poet or any other text content producer. Good luck with cleaning data for mumble rap lyrics though.
 
 That said, let's see the final list of steps we will go through before we actually do some really cool stuff with our data:
 
-1. Optain data
+1. Obtain data
 2. Clean data
 3. Structure data
     1. **Corpus** - collection of song lyrics from every rapper
@@ -20,10 +20,10 @@ That said, let's see the final list of steps we will go through before we actual
     
 As we will notice, the "Clean data" and "Structure data" steps are dependent and could be executed in parallel.
 
-# Optain, Clean, Structure
+# Obtain, Clean, Structure
 
-## 1. Optain data
-Here is the list of rappers and songs we will optain data for:
+## 1. Obtain data
+Here is the list of rappers and songs we will acquire data for:
 1. Tupac Amaru Shakur
     1. "Life Goes On"
     2. "Unconditional Love"
@@ -218,7 +218,7 @@ for i, rapper in enumerate(rappers):
         data[rapper] = pickle.load(file)
 ```
 
-At this point you could check if data was loaded correctly. We are done with obtaining data, now we proceed to the second step, cleaning data.
+At this point you could check if the data was loaded correctly. We are done with obtaining data, now we proceed to the second step, cleaning data.
 
 
 ```python
@@ -233,7 +233,7 @@ At this point you could check if data was loaded correctly. We are done with obt
 Notice that we actually have a list of song lyrics instead of one single text.
 
 ## 2. Clean Data 
-The techniques used to clean textual data are called "text pre-processing techniques". We will use few of those, but won't go to any advanced data cleaning. We will go through the following techniques:
+The techniques used to clean textual data are called "text pre-processing techniques". We will use a few of those, but won't go to any advanced data cleaning. We will go through the following techniques:
 1. Remove garbage characters (like "/n", "[]" and so on)
 2. Remove punctuation
 3. Remove numerical values
@@ -243,7 +243,7 @@ The techniques used to clean textual data are called "text pre-processing techni
 First, we will structure the data in a better way. As noticed before, our data per rapper is a list of lyrics. So, we have to transform it into one single text. We will write a function that will accept a list of lyrics and will return one single text. That can only mean one thing...
 
 ## 3. Structure data
-So, first we will merge our data into single text, and then we will put it in the following formats:
+So, first we will merge our data into a single text, and then we will put it in the following formats:
 - Corpus - collection of song lyrics from every rapper
 - Word Matrix - matrix format of every word used in the Corpus
 
@@ -398,19 +398,6 @@ clean_data
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -477,19 +464,6 @@ word_matrix
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -713,19 +687,6 @@ data.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -807,7 +768,7 @@ Let's take a look at our results.
 #top_50
 ```
 
-Now, we see that some of this words are just stop words and have no real meaning. We will try to remove them:
+Now, we see that some of these words are just stop words and have no real meaning. We will try to remove them:
 
 
 ```python
@@ -900,19 +861,6 @@ data_unique_sort
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -979,19 +927,6 @@ data_words
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1079,19 +1014,6 @@ data_swear_words
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1217,19 +1139,6 @@ data
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1291,19 +1200,6 @@ data
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">

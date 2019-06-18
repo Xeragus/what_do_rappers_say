@@ -11,4 +11,6 @@ dependencies:
   - partd
   - bokeh
   - dask
-  - bs4
+  - pip
+  - pip:
+    - bs4

@@ -14,3 +14,7 @@ dependencies:
   - pip
   - pip:
     - bs4
+    - scikit-learn
+    - wordcloud
+    - numpy
+    - textblob

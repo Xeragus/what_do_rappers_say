@@ -1,19 +1,23 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Xeragus/What-Do-Rappers-Say/master)
 
+
+48 years and three days ago, on June 16, a boy named Lesane Parish Crooks was born. This is my way of remembering your birthday, Pac. 
+"Make sure it's poppin' when we get up there, man, don't front".
+
 ## Mic check / Introduction
-Rap music has been one of the most influential music genres for the biggest part of the last quarter century. It all started by the name of "Rhythm and Poetry", meaning, words mean the world here. This data analysis will try to shed more light on the way the most influential rappers, well, rap. 
+Rap music has been one of the most influential music genres for the biggest part of the last quarter century. It all started by the name of "Rhythm and Poetry", meaning, words mean the world here. This data analysis will try to shed more light on the way the most influential rappers, well, rap.
 
-The purpose of this project is to analyze 5 songs per rapper. We analyze 6 rappers, meaning our data will contain lyrics from 30 songs. The goal of our analysis is to make conclusions on the positivity and the subjectivity of the rappers, as well as the size of their vocabulary.
+The purpose of this project is to analyze 5 songs per rapper. We analyze 7 rappers, meaning our data will contain lyrics from 35 songs. The goal of our analysis is to make conclusions on the positivity and the subjectivity of the rappers, as well as the size of their vocabulary.
 
-This project, as hopefully every other data science project, will go through the notorious process of "Data Cleaning". It's boring and all that, yet it's absolutely vital for the sanity of our results. If you put sour food in the juicer, you can't really expect not to get sour juice, right? Feed a model with bad data, it feeds you with bad results. In the world of data science, it's almost impossible to completely clean your data, yet we should always try to minimize the garbage, so we can maximize the correctness of our output.
+This project, as hopefully every other data science project, will go through the notorious process of "Data Cleaning". It's boring and all that, yet it's absoulutely vital for the sanity of our results. If you put sour food in the juicer, you can't really expect not to get sour juice, right? Feed a model with bad data, it feeds you with bad results. In the world of data science, it's almost impossible to completely clean your data, yet we should always try to minimize the garbage, so we can maximize the correctness of our output.
 
 Clean data is not enough. We need properly structured data. Why? Well, algorithms have a thing for properly structured data. Organizing data in the right way makes it easier for algorithms to extract better information.
 
-It's worth noting that the choice of rappers and songs is totally subjective. You could do this analysis for any musician, author, poet or any other text content producer. Good luck with cleaning data for mumble rap lyrics though.
+It's worth noting that the choice of rappers and songs is totally subjective. You could to this analysis for any musician, author, poet or any other text content producer. Good luck with cleaning data for mumble rap lyrics though.
 
 That said, let's see the final list of steps we will go through before we actually do some really cool stuff with our data:
 
-1. Obtain data
+1. Optain data
 2. Clean data
 3. Structure data
     1. **Corpus** - collection of song lyrics from every rapper
@@ -22,10 +26,8 @@ That said, let's see the final list of steps we will go through before we actual
     
 As we will notice, the "Clean data" and "Structure data" steps are dependent and could be executed in parallel.
 
-# Obtain, Clean, Structure
-
-## 1. Obtain data
-Here is the list of rappers and songs we will acquire data for:
+## 1. Optain data
+Here is the list of rappers and songs we will optain data for:
 1. Tupac Amaru Shakur
     1. "Life Goes On"
     2. "Unconditional Love"
@@ -62,6 +64,12 @@ Here is the list of rappers and songs we will acquire data for:
     3. "If I Can't"
     4. "Many Men"
     5. "When It Rains It Pours"
+7. Eminem
+    1. "Rap God"
+    2. "Phenomenal"
+    3. "Wicked Ways"
+    4. "Kings Never Die"
+    5. "The Ringer"
 
 We will find the lyrics on www.genius.com and store the URLs in variables:
     
@@ -123,6 +131,12 @@ fifty_urls = ['https://genius.com/50-cent-many-men-wish-death-lyrics',
             'https://genius.com/50-cent-if-i-cant-lyrics',
             'https://genius.com/50-cent-window-shopper-lyrics',
             'https://genius.com/50-cent-when-it-rains-it-pours-lyrics']
+
+eminem_urls = ['https://genius.com/Eminem-rap-god-lyrics',
+               'https://genius.com/Eminem-phenomenal-lyrics',
+              'https://genius.com/Eminem-wicked-ways-lyrics',
+              'https://genius.com/Eminem-kings-never-die-lyrics',
+              'https://genius.com/Eminem-the-ringer-lyrics']
 ```
 
 Next, we need a function that will take a URL and return the scraped text.
@@ -152,6 +166,7 @@ lyrics['snoop'] = [fetch_lyrics(url) for url in snoop_urls]
 lyrics['nas'] = [fetch_lyrics(url) for url in nas_urls]
 lyrics['game'] = [fetch_lyrics(url) for url in game_urls]
 lyrics['fifty'] = [fetch_lyrics(url) for url in fifty_urls]
+lyrics['eminem'] = [fetch_lyrics(url) for url in eminem_urls]
 ```
 
     https://genius.com/2pac-life-goes-on-lyrics
@@ -184,6 +199,11 @@ lyrics['fifty'] = [fetch_lyrics(url) for url in fifty_urls]
     https://genius.com/50-cent-if-i-cant-lyrics
     https://genius.com/50-cent-window-shopper-lyrics
     https://genius.com/50-cent-when-it-rains-it-pours-lyrics
+    https://genius.com/Eminem-rap-god-lyrics
+    https://genius.com/Eminem-phenomenal-lyrics
+    https://genius.com/Eminem-wicked-ways-lyrics
+    https://genius.com/Eminem-kings-never-die-lyrics
+    https://genius.com/Eminem-the-ringer-lyrics
 
 
 We could print out the lyrics collection for one rapper just to see that our scraping was successful.
@@ -201,7 +221,7 @@ Now that we have scraped our data, we need to organize it. We will save the lyri
 if not os.path.exists('lyrics'):
     os.makedirs('lyrics')
     
-rappers = ['tupac', 'biggie', 'snoop', 'nas', 'game', 'fifty']
+rappers = ['tupac', 'biggie', 'snoop', 'nas', 'game', 'fifty', 'eminem']
 
 # Create named files
 for i, rapper in enumerate(rappers):
@@ -220,7 +240,7 @@ for i, rapper in enumerate(rappers):
         data[rapper] = pickle.load(file)
 ```
 
-At this point you could check if the data was loaded correctly. We are done with obtaining data, now we proceed to the second step, cleaning data.
+At this point you could check if data was loaded correctly. We are done with obtaining data, now we proceed to the second step, cleaning data.
 
 
 ```python
@@ -235,7 +255,7 @@ At this point you could check if the data was loaded correctly. We are done with
 Notice that we actually have a list of song lyrics instead of one single text.
 
 ## 2. Clean Data 
-The techniques used to clean textual data are called "text pre-processing techniques". We will use a few of those, but won't go to any advanced data cleaning. We will go through the following techniques:
+The techniques used to clean textual data are called "text pre-processing techniques". We will use few of those, but won't go to any advanced data cleaning. We will go through the following techniques:
 1. Remove garbage characters (like "/n", "[]" and so on)
 2. Remove punctuation
 3. Remove numerical values
@@ -245,7 +265,7 @@ The techniques used to clean textual data are called "text pre-processing techni
 First, we will structure the data in a better way. As noticed before, our data per rapper is a list of lyrics. So, we have to transform it into one single text. We will write a function that will accept a list of lyrics and will return one single text. That can only mean one thing...
 
 ## 3. Structure data
-So, first we will merge our data into a single text, and then we will put it in the following formats:
+So, first we will merge our data into single text, and then we will put it in the following formats:
 - Corpus - collection of song lyrics from every rapper
 - Word Matrix - matrix format of every word used in the Corpus
 
@@ -296,7 +316,7 @@ Now we could take a look at Tupac's (or any other rapper's) data.
 
 
 ```python
-#lyrics_dataframe.lyrics.loc['tupac']
+#lyrics_dataframe.lyrics.loc['eminem']
 ```
 
 Now that we have our data restructured we move on to the second data cleaning technique that we will apply: remove garbage characters.
@@ -321,7 +341,7 @@ We could check to see if there are any changes in the data.
 
 
 ```python
-#clean_data.lyrics.loc['tupac']
+#clean_data.lyrics.loc['eminem']
 ```
 
 We move on to the third data cleaning step: remove all punctuation.
@@ -380,14 +400,14 @@ Let's check it out.
 
 
 ```python
-#clean_data.lyrics.loc['tupac']
+#clean_data.lyrics.loc['eminem']
 ```
 
 We will now add the full artist name of the rappers in our dataframe.
 
 
 ```python
-rappers_full_names = ['The Notorious B.I.G.', '50 Cent', 'The Game', 'Nas', 'Snoop Doggy Dogg', 'Tupac Amaru']
+rappers_full_names = ['The Notorious B.I.G.', 'Eminem', '50 Cent', 'The Game', 'Nas', 'Snoop Doggy Dogg', 'Tupac Amaru']
 
 clean_data['name'] = rappers_full_names
 
@@ -400,6 +420,19 @@ clean_data
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -413,6 +446,11 @@ clean_data
       <th>biggie</th>
       <td>the ten crack commandments what nigga cant tell me nothing about this coke cant tell me nothing about this crack this weed for my hustlin...</td>
       <td>The Notorious B.I.G.</td>
+    </tr>
+    <tr>
+      <th>eminem</th>
+      <td>look i was gonna go easy on you not to hurt your feelings but im only going to get this one chance somethings wrong i can feel it six minutes six ...</td>
+      <td>Eminem</td>
     </tr>
     <tr>
       <th>fifty</th>
@@ -466,29 +504,42 @@ word_matrix
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>aaaahif</th>
       <th>abandoned</th>
+      <th>able</th>
+      <th>abuse</th>
       <th>ac</th>
+      <th>accident</th>
+      <th>accolades</th>
+      <th>accomplishments</th>
+      <th>account</th>
       <th>accountant</th>
-      <th>accounts</th>
-      <th>ace</th>
-      <th>achieve</th>
-      <th>acres</th>
-      <th>act</th>
-      <th>actin</th>
       <th>...</th>
-      <th>young</th>
-      <th>younger</th>
-      <th>youre</th>
       <th>yous</th>
+      <th>youthful</th>
       <th>youve</th>
       <th>youyeah</th>
       <th>zags</th>
       <th>zeros</th>
+      <th>zod</th>
+      <th>zombie</th>
       <th>zone</th>
       <th>zé</th>
     </tr>
@@ -498,24 +549,48 @@ word_matrix
       <th>biggie</th>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>14</td>
       <td>3</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>eminem</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
       <td>0</td>
     </tr>
     <tr>
@@ -525,18 +600,18 @@ word_matrix
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>4</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>4</td>
       <td>12</td>
       <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -555,7 +630,7 @@ word_matrix
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>2</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -572,21 +647,21 @@ word_matrix
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
     </tr>
@@ -603,13 +678,13 @@ word_matrix
       <td>0</td>
       <td>0</td>
       <td>...</td>
-      <td>2</td>
       <td>0</td>
-      <td>2</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -622,16 +697,16 @@ word_matrix
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
-      <td>1</td>
-      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>...</td>
-      <td>10</td>
       <td>0</td>
-      <td>6</td>
       <td>0</td>
       <td>2</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -640,7 +715,7 @@ word_matrix
     </tr>
   </tbody>
 </table>
-<p>6 rows × 3032 columns</p>
+<p>7 rows × 3890 columns</p>
 </div>
 
 
@@ -654,8 +729,6 @@ word_matrix.to_pickle("word_matrix.pkl")
 clean_data.to_pickle('clean_data.pkl')
 pickle.dump(cv, open("cv.pkl", "wb"))
 ```
-
-# Exploratory Data Analysis
 
 ## Mic Check / Introduction
 By this point, we have our data as clean and as well structured as possible. Before we go on and apply some cool algorithms to our data, we should first explore and make some basic conclusions about it.
@@ -689,11 +762,25 @@ data.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
       <th></th>
       <th>biggie</th>
+      <th>eminem</th>
       <th>fifty</th>
       <th>game</th>
       <th>nas</th>
@@ -706,6 +793,7 @@ data.head()
       <th>aaaahif</th>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -715,7 +803,28 @@ data.head()
       <th>abandoned</th>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
       <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>able</th>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>abuse</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -723,27 +832,10 @@ data.head()
     <tr>
       <th>ac</th>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>accountant</th>
       <td>1</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>accounts</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -770,7 +862,7 @@ Let's take a look at our results.
 #top_50
 ```
 
-Now, we see that some of these words are just stop words and have no real meaning. We will try to remove them:
+Now, we see that some of this words are just stop words and have no real meaning. We will try to remove them:
 
 
 ```python
@@ -820,7 +912,7 @@ rappers = []
 for item in rappers_data.split(';'): # comma, or other
     rappers.append(item)
     
-rappers_full_names = ['The Notorious B.I.G.', '50 Cent', 'The Game', 'Nas', 'Snoop Dogg', 'Tupac Amaru']
+rappers_full_names = ['The Notorious B.I.G.', 'Eminem', '50 Cent', 'The Game', 'Nas', 'Snoop Dogg', 'Tupac Amaru']
 
 for i, rapper in enumerate(data.columns):
     word_cloud.generate(clean_data.lyrics[rapper])
@@ -834,7 +926,7 @@ plt.show()
 ```
 
 
-![png](images/output_11_0.png)
+![png](output_11_0.png)
 
 
 So, what is the answer to the question "What are the most common words used by each rapper"?
@@ -863,6 +955,19 @@ data_unique_sort
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -873,9 +978,14 @@ data_unique_sort
   </thead>
   <tbody>
     <tr>
-      <th>3</th>
+      <th>1</th>
+      <td>Eminem</td>
+      <td>1475</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Nas</td>
-      <td>1082</td>
+      <td>1080</td>
     </tr>
     <tr>
       <th>0</th>
@@ -883,22 +993,22 @@ data_unique_sort
       <td>863</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Tupac Amaru</td>
       <td>713</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>The Game</td>
       <td>702</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>50 Cent</td>
       <td>693</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Snoop Dogg</td>
       <td>622</td>
     </tr>
@@ -929,6 +1039,19 @@ data_words
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -947,30 +1070,36 @@ data_words
     </tr>
     <tr>
       <th>1</th>
+      <td>Eminem</td>
+      <td>1475</td>
+      <td>2885</td>
+    </tr>
+    <tr>
+      <th>2</th>
       <td>50 Cent</td>
       <td>693</td>
       <td>1498</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>The Game</td>
       <td>702</td>
       <td>1327</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>Nas</td>
-      <td>1082</td>
-      <td>1890</td>
+      <td>1080</td>
+      <td>1917</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>Snoop Dogg</td>
       <td>622</td>
       <td>1566</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>6</th>
       <td>Tupac Amaru</td>
       <td>713</td>
       <td>1686</td>
@@ -997,7 +1126,7 @@ plt.show()
 ```
 
 
-![png](images/output_17_0.png)
+![png](output_17_0.png)
 
 
 Let's finish the Exploratory Data Analysis with the third technique.
@@ -1016,6 +1145,19 @@ data_swear_words
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1033,6 +1175,13 @@ data_swear_words
       <td>3</td>
       <td>15</td>
       <td>17</td>
+    </tr>
+    <tr>
+      <th>eminem</th>
+      <td>0</td>
+      <td>10</td>
+      <td>20</td>
+      <td>24</td>
     </tr>
     <tr>
       <th>fifty</th>
@@ -1083,20 +1232,21 @@ plt.rcParams['figure.figsize'] = [10, 8]
 
 for i, rapper in enumerate(data_swear_words.index):
     print(rapper)
-    x = data_swear_words.nigga.loc[rapper]
+    x = data_swear_words.fuck.loc[rapper]
     y = data_swear_words.shit.loc[rapper]
     plt.scatter(x, y, color='blue')
     plt.text(x+1.5, y+0.5, rappers_full_names[i], fontsize=10)
     plt.xlim(0, 40) 
     
 plt.title('Number of swear words used', fontsize=20)
-plt.xlabel('Nigga #', fontsize=15)
+plt.xlabel('Fuck #', fontsize=15)
 plt.ylabel('Shit #', fontsize=15)
 
 plt.show()
 ```
 
     biggie
+    eminem
     fifty
     game
     nas
@@ -1105,12 +1255,10 @@ plt.show()
 
 
 
-![png](images/output_21_1.png)
+![png](output_21_1.png)
 
 
 Conclusion: We can be satisfied with what we got as results. It's not perfect and we could definitely clean our data a lot better, but it's sufficient for now. As a reminder, we went through 3 different EDA (Exploratory Data Analysis) techniques and each gave us some different conclusion. Our basic data analysis was a success, now we go on to do the real thing.
-
-# Sentiment Analysis
 
 
 ## Mic Check / Introduction
@@ -1141,6 +1289,19 @@ data
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1154,6 +1315,11 @@ data
       <th>biggie</th>
       <td>the ten crack commandments what nigga...</td>
       <td>The Notorious B.I.G.</td>
+    </tr>
+    <tr>
+      <th>eminem</th>
+      <td>look i was gonna go easy on you not to hurt yo...</td>
+      <td>Eminem</td>
     </tr>
     <tr>
       <th>fifty</th>
@@ -1202,6 +1368,19 @@ data
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1221,6 +1400,13 @@ data
       <td>0.503563</td>
     </tr>
     <tr>
+      <th>eminem</th>
+      <td>look i was gonna go easy on you not to hurt yo...</td>
+      <td>Eminem</td>
+      <td>-0.064630</td>
+      <td>0.533969</td>
+    </tr>
+    <tr>
       <th>fifty</th>
       <td>man we gotta go get somethin to eat man im hun...</td>
       <td>50 Cent</td>
@@ -1238,8 +1424,8 @@ data
       <th>nas</th>
       <td>but thats the whole tragic point my friends wh...</td>
       <td>Nas</td>
-      <td>-0.012667</td>
-      <td>0.452843</td>
+      <td>-0.010095</td>
+      <td>0.453374</td>
     </tr>
     <tr>
       <th>snoop</th>
@@ -1267,13 +1453,37 @@ But, how does TextBlob know what words mean? Well, lingvists have given differen
 
 
 ```python
-TextBlob('nice').sentiment
+TextBlob('good').sentiment
 ```
 
 
 
 
-    Sentiment(polarity=0.6, subjectivity=1.0)
+    Sentiment(polarity=0.7, subjectivity=0.6000000000000001)
+
+
+
+
+```python
+TextBlob('very good').sentiment
+```
+
+
+
+
+    Sentiment(polarity=0.9099999999999999, subjectivity=0.7800000000000001)
+
+
+
+
+```python
+TextBlob('excellent').sentiment
+```
+
+
+
+
+    Sentiment(polarity=1.0, subjectivity=1.0)
 
 
 
@@ -1288,7 +1498,7 @@ for index, rapper in enumerate(data.index):
     y = data.subjectivity.loc[rapper]
     plt.scatter(x, y, color='blue')
     plt.text(x+.001, y+.001, data['name'][index], fontsize=10)
-    plt.xlim(-.03, .07) 
+    plt.xlim(-.07, .07) 
     
 plt.title('Sentiment Analysis', fontsize=20)
 plt.xlabel('Positivity', fontsize=15)
@@ -1298,4 +1508,9 @@ plt.show()
 ```
 
 
-![png](images/output_9_0.png)
+![png](output_11_0.png)
+
+
+Conclusions from the sentiment analysis:
+- Tupac is the most 'positive' in his words, while Eminem is by far the most 'negative' lyricist 
+- The Game, Nas and Tupac are mostly subjective and talk about their feelings, while Eminem and 50 Cent state more facts.

@@ -1,3 +1,5 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Xeragus/What-Do-Rappers-Say/master)
+
 ## Mic check / Introduction
 Rap music has been one of the most influential music genres for the biggest part of the last quarter century. It all started by the name of "Rhythm and Poetry", meaning, words mean the world here. This data analysis will try to shed more light on the way the most influential rappers, well, rap. 
 

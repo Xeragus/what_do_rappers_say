@@ -91,52 +91,24 @@ import string
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Storing URLs to the Tupac songs lyrics
-tupac_urls = ['https://genius.com/2pac-life-goes-on-lyrics',
-             'https://genius.com/2pac-unconditional-love-lyrics',
-             'https://genius.com/2pac-changes-lyrics',
-             'https://genius.com/2pac-until-the-end-of-time-lyrics',
-             'https://genius.com/2pac-dear-mama-lyrics']
+tupac_urls = []
 
 # Storing URLs to the Biggie songs lyrics
-biggie_urls = ['https://genius.com/The-notorious-big-ten-crack-commandments-lyrics',
-              'https://genius.com/The-notorious-big-one-more-chance-lyrics',
-              'https://genius.com/The-notorious-big-big-poppa-lyrics',
-              'https://genius.com/The-notorious-big-juicy-lyrics',
-              'https://genius.com/The-notorious-big-hypnotize-lyrics']
+biggie_urls = []
 
 # Storing URLs to the Snoop songs lyrics
-snoop_urls = ['https://genius.com/Snoop-dogg-gin-and-juice-lyrics',
-             'https://genius.com/Snoop-dogg-thats-that-shit-lyrics',
-             'https://genius.com/Snoop-dogg-tha-doggfather-lyrics',
-             'https://genius.com/Snoop-dogg-eastside-party-lyrics',
-             'https://genius.com/Snoop-dogg-who-am-i-lyrics']
+snoop_urls = []
 
 # Storing URLs to the Nas songs lyrics
-nas_urls = ['https://genius.com/Nas-surviving-the-times-lyrics',
-           'https://genius.com/Nas-nas-is-like-lyrics',
-           'https://genius.com/Nas-ny-state-of-mind-lyrics',
-           'https://genius.com/Nas-the-message-lyrics',
-           'https://genius.com/Nas-memory-lane-sittin-in-da-park-lyrics']
+nas_urls = []
 
 # Storing URLs to the The Game songs lyrics
-game_urls = ['https://genius.com/The-game-where-im-from-lyrics',
-            'https://genius.com/The-game-one-night-lyrics',
-            'https://genius.com/The-game-dont-need-your-love-lyrics',
-            'https://genius.com/The-game-laugh-lyrics',
-            'https://genius.com/The-game-too-much-lyrics']
+game_urls = [']
 
 # Storing URLs to the 50 Cent songs lyrics
-fifty_urls = ['https://genius.com/50-cent-many-men-wish-death-lyrics',
-            'https://genius.com/50-cent-hustlers-ambition-lyrics',
-            'https://genius.com/50-cent-if-i-cant-lyrics',
-            'https://genius.com/50-cent-window-shopper-lyrics',
-            'https://genius.com/50-cent-when-it-rains-it-pours-lyrics']
+fifty_urls = []
 
-eminem_urls = ['https://genius.com/Eminem-rap-god-lyrics',
-               'https://genius.com/Eminem-phenomenal-lyrics',
-              'https://genius.com/Eminem-wicked-ways-lyrics',
-              'https://genius.com/Eminem-kings-never-die-lyrics',
-              'https://genius.com/Eminem-the-ringer-lyrics']
+eminem_urls = []
 ```
 
 Next, we need a function that will take a URL and return the scraped text.
@@ -168,43 +140,6 @@ lyrics['game'] = [fetch_lyrics(url) for url in game_urls]
 lyrics['fifty'] = [fetch_lyrics(url) for url in fifty_urls]
 lyrics['eminem'] = [fetch_lyrics(url) for url in eminem_urls]
 ```
-
-    https://genius.com/2pac-life-goes-on-lyrics
-    https://genius.com/2pac-unconditional-love-lyrics
-    https://genius.com/2pac-changes-lyrics
-    https://genius.com/2pac-until-the-end-of-time-lyrics
-    https://genius.com/2pac-dear-mama-lyrics
-    https://genius.com/The-notorious-big-ten-crack-commandments-lyrics
-    https://genius.com/The-notorious-big-one-more-chance-lyrics
-    https://genius.com/The-notorious-big-big-poppa-lyrics
-    https://genius.com/The-notorious-big-juicy-lyrics
-    https://genius.com/The-notorious-big-hypnotize-lyrics
-    https://genius.com/Snoop-dogg-gin-and-juice-lyrics
-    https://genius.com/Snoop-dogg-thats-that-shit-lyrics
-    https://genius.com/Snoop-dogg-tha-doggfather-lyrics
-    https://genius.com/Snoop-dogg-eastside-party-lyrics
-    https://genius.com/Snoop-dogg-who-am-i-lyrics
-    https://genius.com/Nas-surviving-the-times-lyrics
-    https://genius.com/Nas-nas-is-like-lyrics
-    https://genius.com/Nas-ny-state-of-mind-lyrics
-    https://genius.com/Nas-the-message-lyrics
-    https://genius.com/Nas-memory-lane-sittin-in-da-park-lyrics
-    https://genius.com/The-game-where-im-from-lyrics
-    https://genius.com/The-game-one-night-lyrics
-    https://genius.com/The-game-dont-need-your-love-lyrics
-    https://genius.com/The-game-laugh-lyrics
-    https://genius.com/The-game-too-much-lyrics
-    https://genius.com/50-cent-many-men-wish-death-lyrics
-    https://genius.com/50-cent-hustlers-ambition-lyrics
-    https://genius.com/50-cent-if-i-cant-lyrics
-    https://genius.com/50-cent-window-shopper-lyrics
-    https://genius.com/50-cent-when-it-rains-it-pours-lyrics
-    https://genius.com/Eminem-rap-god-lyrics
-    https://genius.com/Eminem-phenomenal-lyrics
-    https://genius.com/Eminem-wicked-ways-lyrics
-    https://genius.com/Eminem-kings-never-die-lyrics
-    https://genius.com/Eminem-the-ringer-lyrics
-
 
 We could print out the lyrics collection for one rapper just to see that our scraping was successful.
 

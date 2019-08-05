@@ -115,7 +115,7 @@ Next, we need a function that will take a URL and return the scraped text.
 
 
 ```python
-# Function that takes a URL as parameter, scrapes the Genius page at that URL, extracts and returns the lyrics
+# Function that takes a URL as parameter, scrapes the ****** page at that URL, extracts and returns the lyrics
 def fetch_lyrics(url):
     print(url)
     

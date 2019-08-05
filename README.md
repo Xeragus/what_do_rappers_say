@@ -71,7 +71,7 @@ Here is the list of rappers and songs we will optain data for:
     4. "Kings Never Die"
     5. "The Ringer"
 
-We will find the lyrics on www.genius.com and store the URLs in variables:
+We will find the lyrics on *********** and store the URLs in variables:
     
 
 
